@@ -1,7 +1,6 @@
 # SalArcy
 
 ![SalArcy Logo](SalArcy-logo.jpg)  
-*(replace with your logo image)*
 
 **Global USDC/EURC Payroll & Treasury on Arc**  
 Automated, cross-chain salary payouts powered by Circle's Arc blockchain.

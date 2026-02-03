@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
+# Diagnostic reports[](https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
@@ -25,23 +25,23 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+# Grunt intermediate storage[](https://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
-# Bower dependency directory (https://bower.io/)
+# Bower dependency directory[](https://bower.io/)
 bower_components
 
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (https://nodejs.org/api/addons.html)
+# Compiled binary addons[](https://nodejs.org/api/addons.html)
 build/Release
 
 # Dependency directories
 node_modules/
 jspm_packages/
 
-# Snowpack dependency directory (https://snowpack.dev/)
+# Snowpack dependency directory[](https://snowpack.dev/)
 web_modules/
 
 # TypeScript cache
@@ -71,7 +71,7 @@ web_modules/
 .env.*
 !.env.example
 
-# parcel-bundler cache (https://parceljs.org/)
+# parcel-bundler cache[](https://parceljs.org/)
 .cache
 .parcel-cache
 
@@ -94,7 +94,6 @@ dist
 
 # vuepress v2.x temp and cache directory
 .temp
-.cache
 
 # Sveltekit cache directory
 .svelte-kit/
@@ -138,3 +137,55 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# next.js
+.next/
+out/
+
+# production
+build
+
+# misc
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript (already above)
+next-env.d.ts
+
+# Ajouts pour Scaffold-ETH avec Foundry (monorepo)
+# Foundry specifics (dans packages/foundry)
+packages/foundry/out/
+packages/foundry/cache/
+packages/foundry/forge-std/  # Si vous avez cloné des libs comme forge-std
+packages/foundry/lib/        # Dossiers de libs installées via forge install
+
+# Next.js specifics (dans packages/nextjs, pour compléter)
+packages/nextjs/.next/
+packages/nextjs/out/
+packages/nextjs/.vercel/
+packages/nextjs/ipfs-upload.config.json
+
+# Autres caches potentiels (récursifs)
+artifacts/    # Artifacts Solidity si générés ailleurs
+cache/        # Caches généraux
+typechain/    # Typechain si utilisé
+typechain-types/
+coverage/     # Couverture de tests
+coverage.json
+deployments/localhost/  # Déploiements locaux
+
+# Foundry/Anvil caches globaux (mais ceux-ci sont souvent en dehors du projet, dans ~/.foundry)
+# Si besoin, ajoutez manuellement si ils apparaissent dans le repo

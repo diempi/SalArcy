@@ -7,7 +7,7 @@ import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
   title: "SalArcy App",
-  description: "",
+  description: "Automated, cross-chain salary payouts powered by Circle's Arc blockchain.",
 });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {

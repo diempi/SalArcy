@@ -1,5 +1,5 @@
 {
-  "name": "Scaffold-ETH 2 DApp",
-  "description": "A DApp built with Scaffold-ETH",
-  "iconPath": "logo.svg"
+  "name": "SalArcy DApp",
+  "description": "Automated, cross-chain salary payouts powered by Circle's Arc blockchain.",
+  "iconPath": "SalArcy-logo"
 }

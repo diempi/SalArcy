@@ -23,10 +23,17 @@ export default function SalaryPage() {
 
   // Add Recipient
   const addRecipient = async () => {
+    // Validate wallet address
+    const addressRegex = /^0x[a-fA-F0-9]{40}$/;
+    if (!addressRegex.test(recipientName)) {
+      alert("Error: Invalid wallet address. Must start with 0x and be 42 characters long.");
+      return;
+    }
+
     const res = await fetch("/api/salary/add-recipient", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: recipientName }),
+      body: JSON.stringify({ address: recipientName }),
     });
     const data = await res.json();
     if (data.success) {

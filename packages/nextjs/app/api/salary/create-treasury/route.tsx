@@ -10,7 +10,7 @@ export async function POST() {
 
     const walletResponse = await circleClient.createWallet({
       walletSetId,
-      blockchains: ['arc'],
+      blockchains: ['arc-testnet'],
       accountType: 'EOA',
     });
 
@@ -25,3 +25,5 @@ export async function POST() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+export { treasuryWallet };

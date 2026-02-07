@@ -10,7 +10,7 @@ export async function POST() {
 
     const walletResponse = await circleClient.createWallet({
       walletSetId,
-      blockchains: ['arc-testnet'],
+      blockchains: ['ARC-TESTNET'],
       accountType: 'EOA',
     });
 

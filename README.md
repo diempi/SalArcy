@@ -10,7 +10,7 @@ Built for **HackMoney 2026** — targeting the **Arc "Global Payouts and Treasur
 ## ✨ Features
 
 - Create a company treasury wallet (dev-controlled)
-- Fund treasury via Bridge Kit (cross-chain USDC inflows)
+- Fund treasury via Bridge Kit (cross-chain USDC inflows) // to add later as an update
 - Add multiple employee/recipient wallets
 - Execute one-click multi-recipient payroll in USDC
 - Real-time balance overview

@@ -5,35 +5,26 @@ import { treasuryWallet } from '../create-treasury/route';
 let recipients: any[] = []; // In-memory storage for local development
 
 export async function POST(req: Request) {
-  const { name, email } = await req.json(); // Optional, for UX
+  const { address } = await req.json(); // Accept wallet address
 
   if (!treasuryWallet) {
     return NextResponse.json({ error: "Create treasury first" }, { status: 400 });
   }
 
-  try {
-    // Create a new wallet for the recipient (in the same walletSet for simplicity)
-    const walletResponse = await circleClient.createWallet({
-      walletSetId: treasuryWallet.walletSetId,
-      blockchains: ['arc-testnet'],
-      accountType: 'EOA',
-    });
-
-    const newRecipient = {
-      walletId: walletResponse.data.wallet.id,
-      address: walletResponse.data.wallet.address,
-      name: name || 'Unnamed',
-      email: email || '',
-    };
-
-    recipients.push(newRecipient);
-
-    console.log('Recipient added:', newRecipient); // Debug
-
-    return NextResponse.json({ success: true, recipient: newRecipient });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (!address || typeof address !== 'string' || !/^0x[a-fA-F0-9]{40}$/.test(address)) {
+    return NextResponse.json({ error: "Invalid wallet address" }, { status: 400 });
   }
+
+  const newRecipient = {
+    address,
+    name: 'Unnamed', // Optional, can remove if not needed
+  };
+
+  recipients.push(newRecipient);
+
+  console.log('Recipient added:', newRecipient); // Debug
+
+  return NextResponse.json({ success: true, recipient: newRecipient });
 }
 
 export { recipients };

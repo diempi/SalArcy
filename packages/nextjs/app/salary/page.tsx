@@ -7,7 +7,7 @@ export default function SalaryPage() {
   const [recipients, setRecipients] = useState<any[]>([]);
   const [payoutResults, setPayoutResults] = useState<any[]>([]);
   const [amount, setAmount] = useState("0.1"); // Default USDC per recipient
-  const [recipientName, setRecipientName] = useState("");
+  const [recipientAddress, setRecipientAddress] = useState("");
 
   // Create Treasury
   const createTreasury = async () => {
@@ -25,7 +25,7 @@ export default function SalaryPage() {
   const addRecipient = async () => {
     // Validate wallet address
     const addressRegex = /^0x[a-fA-F0-9]{40}$/;
-    if (!addressRegex.test(recipientName)) {
+    if (!addressRegex.test(recipientAddress)) {
       alert("Error: Invalid wallet address. Must start with 0x and be 42 characters long.");
       return;
     }
@@ -33,12 +33,12 @@ export default function SalaryPage() {
     const res = await fetch("/api/salary/add-recipient", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ address: recipientName }),
+      body: JSON.stringify({ address: recipientAddress }),
     });
     const data = await res.json();
     if (data.success) {
       setRecipients([...recipients, data.recipient]);
-      setRecipientName("");
+      setRecipientAddress("");
     } else {
       alert(`Error: ${data.error}`);
     }
@@ -70,7 +70,7 @@ export default function SalaryPage() {
         </button>
       )}
       {treasury && (
-        <p className="mb-4">Treasury Address: {treasury.address} (Fund with test USDC via faucet)</p>
+        <p className="mb-4">Treasury Address: {treasury.address} </p>
       )}
 
       {/* Step 2: Add Recipients */}
@@ -78,9 +78,9 @@ export default function SalaryPage() {
         <div className="mb-4">
           <input
             type="text"
-            placeholder="Recipient Name"
-            value={recipientName}
-            onChange={(e) => setRecipientName(e.target.value)}
+            placeholder="Recipient Wallet Address"
+            value={recipientAddress}
+            onChange={(e) => setRecipientAddress(e.target.value)}
             className="input input-bordered mr-2"
           />
           <button className="btn btn-secondary" onClick={addRecipient}>
@@ -88,7 +88,7 @@ export default function SalaryPage() {
           </button>
           <ul className="mt-2">
             {recipients.map((rec, i) => (
-              <li key={i}>{rec.name}: {rec.address}</li>
+              <li key={i}>{rec.address}</li>
             ))}
           </ul>
         </div>

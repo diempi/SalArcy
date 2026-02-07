@@ -8,6 +8,7 @@ import { hardhat } from "viem/chains";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
+import { useAccount } from "wagmi";
 
 type HeaderMenuLink = {
   label: string;
@@ -15,19 +16,40 @@ type HeaderMenuLink = {
   icon?: React.ReactNode;
 };
 
-export const menuLinks: HeaderMenuLink[] = [
+const generalMenuLinks: HeaderMenuLink[] = [
   {
     label: "Home",
     href: "/",
   },
-  {
-    label: "Salary Dashboard",
-    href: "/salary",
-  },
 ];
 
-export const HeaderMenuLinks = () => {
+const connectedMenuLinks: HeaderMenuLink[] = [
+  {
+    label: "New Payroll",
+    href: "/new-payroll",
+  },
+  {
+    label: "Add New Recipient",
+    href: "/add-recipient",
+  },
+  {
+    label: "View Transactions",
+    href: "/view-transactions",
+  },
+  {
+    label: "View Recipients",
+    href: "/view-recipients",
+  },
+  // Add any other proposed links here, e.g.:
+  // {
+  //   label: "Treasury Overview",
+  //   href: "/treasury",
+  // },
+];
+
+export const HeaderMenuLinks = ({ isConnected }: { isConnected: boolean }) => {
   const pathname = usePathname();
+  const menuLinks = [...generalMenuLinks, ...(isConnected ? connectedMenuLinks : [])];
 
   return (
     <>
@@ -58,6 +80,7 @@ export const HeaderMenuLinks = () => {
 export const Header = () => {
   const { targetNetwork } = useTargetNetwork();
   const isLocalNetwork = targetNetwork.id === hardhat.id;
+  const { isConnected } = useAccount();
 
   const burgerMenuRef = useRef<HTMLDetailsElement>(null);
   useOutsideClick(burgerMenuRef, () => {
@@ -77,7 +100,7 @@ export const Header = () => {
               burgerMenuRef?.current?.removeAttribute("open");
             }}
           >
-            <HeaderMenuLinks />
+            <HeaderMenuLinks isConnected={isConnected} />
           </ul>
         </details>
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
@@ -90,7 +113,7 @@ export const Header = () => {
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
-          <HeaderMenuLinks />
+          <HeaderMenuLinks isConnected={isConnected} />
         </ul>
       </div>
       <div className="navbar-end grow mr-4">
